@@ -1,7 +1,9 @@
 package com.item.consultant.controller.aiservice;
 
 
+import dev.langchain4j.service.MemoryId;
 import dev.langchain4j.service.SystemMessage;
+import dev.langchain4j.service.UserMessage;
 import dev.langchain4j.service.spring.AiService;
 import dev.langchain4j.service.spring.AiServiceWiringMode;
 import reactor.core.publisher.Flux;
@@ -10,7 +12,8 @@ import reactor.core.publisher.Flux;
         wiringMode = AiServiceWiringMode.EXPLICIT, // 手动装配
         chatModel = "openAiChatModel", // 指定模型
         streamingChatModel = "openAiStreamingChatModel",
-        chatMemory = "chatMemory" // 配置会话记忆对象
+        //chatMemory = "chatMemory", // 配置会话记忆对象
+        chatMemoryProvider = "chatMemoryProvider" // 配置会话记忆提供者对象
 )
 public interface ConsultantService {
     // 用于阻塞聊天的方法
@@ -26,5 +29,5 @@ public interface ConsultantService {
 //    Flux<String> chatStream(@V("msg") String message);
 
     @SystemMessage(fromResource = "system.txt") // 从 resources 目录加载系统消息文件
-    Flux<String> chatStream(String message);
+    Flux<String> chatStream(@MemoryId String memoryId, @UserMessage String message);
 }

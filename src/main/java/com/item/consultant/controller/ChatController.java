@@ -23,8 +23,8 @@ public class ChatController {
     }
 
     @GetMapping(value = "/streamChat",produces = "text/html;charset=utf-8")
-    public Flux<String> streamChat(String message) {
-        Flux<String> result = consultantService.chatStream(message);
+    public Flux<String> streamChat(String memoryId,String message) {
+        Flux<String> result = consultantService.chatStream(memoryId, message);
         return result;
     }
 }
