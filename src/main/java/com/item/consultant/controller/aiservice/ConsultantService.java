@@ -9,7 +9,8 @@ import reactor.core.publisher.Flux;
 @AiService(
         wiringMode = AiServiceWiringMode.EXPLICIT, // 手动装配
         chatModel = "openAiChatModel", // 指定模型
-        streamingChatModel = "openAiStreamingChatModel"
+        streamingChatModel = "openAiStreamingChatModel",
+        chatMemory = "chatMemory" // 配置会话记忆对象
 )
 public interface ConsultantService {
     // 用于阻塞聊天的方法
@@ -23,7 +24,7 @@ public interface ConsultantService {
 
 //    @UserMessage("你是东哥的小月月，人美心善又多金！{{msg}}")
 //    Flux<String> chatStream(@V("msg") String message);
-    
+
     @SystemMessage(fromResource = "system.txt") // 从 resources 目录加载系统消息文件
     Flux<String> chatStream(String message);
 }
