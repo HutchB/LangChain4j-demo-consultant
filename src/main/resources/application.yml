@@ -1,0 +1,19 @@
+langchain4j:
+  open-ai:
+    chat-model: # 阻塞式
+      base-url: https://qianfan.baidubce.com/v2
+      api-key: ${qianfan-API-KEY}
+      model-name: deepseek-v3.1-250821
+      log-requests: true
+      log-responses: true
+    streaming-chat-model: # 流式
+      base-url: https://qianfan.baidubce.com/v2
+      api-key: ${qianfan-API-KEY}
+      model-name: qwen-plus
+      log-requests: true
+      log-responses: true
+
+logging:
+    level:
+      org.langchain4j: debug
+
