@@ -9,7 +9,7 @@ langchain4j:
     streaming-chat-model: # 流式
       base-url: https://qianfan.baidubce.com/v2
       api-key: ${qianfan-API-KEY}
-      model-name: qwen-plus
+      model-name: deepseek-v3.1-250821
       log-requests: true
       log-responses: true
 
