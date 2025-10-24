@@ -1,7 +1,10 @@
 package com.item.consultant.controller.config;
 
 import dev.langchain4j.data.document.Document;
+import dev.langchain4j.data.document.DocumentSplitter;
 import dev.langchain4j.data.document.loader.ClassPathDocumentLoader;
+import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser;
+import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
@@ -64,13 +67,19 @@ public class CommonConfig {
     @Bean
     public EmbeddingStore store() {
         // 1.加载文档进内存 类路径加载 文件磁盘加载 url加载
-        List<Document> documents = ClassPathDocumentLoader.loadDocuments("content");
+        //List<Document> documents = ClassPathDocumentLoader.loadDocuments("content");
         //List<Document> documents = FileSystemDocumentLoader.loadDocuments("D:\\codeSpace\\source\\CodeSource\\study\\consultant\\consultant\\src\\main\\resources\\content");
+        List<Document> documents = ClassPathDocumentLoader.loadDocuments("content", new ApachePdfBoxDocumentParser());
         // 2.构建向量数据库操作对象
         InMemoryEmbeddingStore store = new InMemoryEmbeddingStore();
+
+        // 构建文档分割器对象
+        DocumentSplitter ds = DocumentSplitters.recursive(500, 100); // 每个片段字符数量 两片段重叠字数
+
         // 3.构建一个embeddingStoreIngestor对象,完成文本数据切割，向量化，存储
         EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
                 .embeddingStore(store)
+                .documentSplitter(ds)
                 .build();
         ingestor.ingest(documents);
         return store;
