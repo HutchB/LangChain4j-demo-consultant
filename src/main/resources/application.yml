@@ -10,12 +10,14 @@ langchain4j:
       base-url: https://qianfan.baidubce.com/v2
       api-key: ${qianfan-API-KEY}
       model-name: deepseek-v3.1-250821
-      log-requests: true
-      log-responses: true
+      log-requests: true #请求消息日志
+      log-responses: true #响应消息日志
 
 logging:
-    level:
-      org.langchain4j: debug
+  level:
+    root: info         # 全局日志级别设置为 info
+    dev.langchain4j: debug  # （可选）单独针对 langchain4j 包保持 debug
+
 
 spring:
   data:
