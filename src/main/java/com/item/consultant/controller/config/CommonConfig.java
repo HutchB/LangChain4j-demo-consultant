@@ -8,6 +8,7 @@ import dev.langchain4j.data.document.splitter.DocumentSplitters;
 import dev.langchain4j.memory.ChatMemory;
 import dev.langchain4j.memory.chat.ChatMemoryProvider;
 import dev.langchain4j.memory.chat.MessageWindowChatMemory;
+import dev.langchain4j.model.embedding.EmbeddingModel;
 import dev.langchain4j.model.openai.OpenAiChatModel;
 import dev.langchain4j.rag.content.retriever.ContentRetriever;
 import dev.langchain4j.rag.content.retriever.EmbeddingStoreContentRetriever;
@@ -23,13 +24,12 @@ import java.util.List;
 
 @Configuration
 public class CommonConfig {
-
-
     @Resource
     private OpenAiChatModel openAiChatModel;
-
     @Resource
     private ChatMemoryStore redisChatMemoryStore;
+    @Resource
+    private EmbeddingModel embeddingModel;
 
 //    @Bean
 //    public ConsultantService consultantService(){
@@ -78,8 +78,9 @@ public class CommonConfig {
 
         // 3.构建一个embeddingStoreIngestor对象,完成文本数据切割，向量化，存储
         EmbeddingStoreIngestor ingestor = EmbeddingStoreIngestor.builder()
-                .embeddingStore(store)
-                .documentSplitter(ds)
+                .embeddingStore(store) // 设置向量数据库操作对象
+                .documentSplitter(ds) // 设置文档分割器对象
+                .embeddingModel(embeddingModel) // 设置向量化模型对象
                 .build();
         ingestor.ingest(documents);
         return store;
@@ -92,6 +93,7 @@ public class CommonConfig {
                 .embeddingStore(store)//设置向量数据库操作对象
                 .minScore(0.5) //设置最小分数
                 .maxResults(3) //设置最大片段数量
+                .embeddingModel(embeddingModel) // 设置向量化模型对象
                 .build();
     }
 

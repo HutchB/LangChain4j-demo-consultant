@@ -12,6 +12,12 @@ langchain4j:
       model-name: deepseek-v3.1-250821
       log-requests: true #请求消息日志
       log-responses: true #响应消息日志
+    embedding-model:
+      base-url: https://qianfan.baidubce.com/v2
+      api-key: ${qianfan-API-KEY}
+      model-name: qwen3-embedding-8b
+      log-requests: true
+      log-responses: true
 
 logging:
   level:
