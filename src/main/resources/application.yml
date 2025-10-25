@@ -3,13 +3,13 @@ langchain4j:
     chat-model: # 阻塞式
       base-url: https://qianfan.baidubce.com/v2
       api-key: ${qianfan-API-KEY}
-      model-name: deepseek-v3.1-250821
+      model-name: deepseek-v3.2
       log-requests: true
       log-responses: true
     streaming-chat-model: # 流式
       base-url: https://qianfan.baidubce.com/v2
       api-key: ${qianfan-API-KEY}
-      model-name: deepseek-v3.1-250821
+      model-name: deepseek-v3.2
       log-requests: true #请求消息日志
       log-responses: true #响应消息日志
     embedding-model:
@@ -45,4 +45,3 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
