@@ -18,6 +18,14 @@ langchain4j:
       model-name: qwen3-embedding-8b
       log-requests: true
       log-responses: true
+      max-segments-per-batch: 10
+  community:
+    redis:
+      host: 192.168.11.10
+      port: 6379
+
+
+
 
 logging:
   level:
@@ -28,6 +36,6 @@ logging:
 spring:
   data:
     redis:
-      host: localhost
+      host: 192.168.11.10
       port: 6379
       database: 10
