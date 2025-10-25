@@ -1,4 +1,4 @@
-package com.item.consultant.controller.aiservice;
+package com.item.consultant.aiservice;
 
 
 import dev.langchain4j.service.MemoryId;

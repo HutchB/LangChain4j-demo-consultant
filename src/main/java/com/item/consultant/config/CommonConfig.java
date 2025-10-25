@@ -1,4 +1,4 @@
-package com.item.consultant.controller.config;
+package com.item.consultant.config;
 
 import dev.langchain4j.community.store.embedding.redis.RedisEmbeddingStore;
 import dev.langchain4j.data.document.Document;

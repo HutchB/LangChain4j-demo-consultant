@@ -1,4 +1,4 @@
-package com.item.consultant.controller.reponsitory;
+package com.item.consultant.reponsitory;
 
 import dev.langchain4j.data.message.ChatMessage;
 import dev.langchain4j.data.message.ChatMessageDeserializer;
@@ -16,17 +16,17 @@ public class RedisChatMemoryStore implements ChatMemoryStore {
 
     @Resource
     private StringRedisTemplate stringRedisTemplate;
-    
+
     @Override
     public List<ChatMessage> getMessages(Object memoryId) {
         // 获取会话消息
         String json = stringRedisTemplate.opsForValue().get(memoryId.toString());
-        
+
         // 如果没有数据，返回空列表
         if (json == null || json.isEmpty() || "null".equals(json)) {
             return List.of();
         }
-        
+
         // 把json字符串转List<ChatMessage>
         return ChatMessageDeserializer.messagesFromJson(json);
     }

@@ -24,9 +24,6 @@ langchain4j:
       host: 192.168.11.10
       port: 6379
 
-
-
-
 logging:
   level:
     root: info         # 全局日志级别设置为 info
@@ -39,3 +36,13 @@ spring:
       host: 192.168.11.10
       port: 6379
       database: 10
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.NonRegisteringDriver
+    url: jdbc:mysql://127.0.0.1:3306/volunteer?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

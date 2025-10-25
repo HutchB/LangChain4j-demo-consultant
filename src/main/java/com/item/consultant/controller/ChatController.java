@@ -1,6 +1,6 @@
 package com.item.consultant.controller;
 
-import com.item.consultant.controller.aiservice.ConsultantService;
+import com.item.consultant.aiservice.ConsultantService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
